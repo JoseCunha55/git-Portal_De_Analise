@@ -1,0 +1,116 @@
+﻿<navigation:Page x:Class="Portal_De_Analise.Views.mainConsultas" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="mainConsultas Page">
+    
+    <Grid x:Name="LayoutMainConsultas">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/EduCase.png" Stretch="Uniform"></ImageBrush>
+        </Grid.Background>
+        <Border Background="Black" VerticalAlignment="Top" >
+            <StackPanel Orientation="Horizontal" Style="{StaticResource BrandingStackPanelStyle}">
+                <HyperlinkButton x:Name="hypEvaConEntradaSaida" Style="{StaticResource LinkStyle}" Click="hypEvaConEntradaSaida_Click"
+                                 Content="Evadidos por Campus">
+                    <HyperlinkButton.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Blue" Offset="0.1" />
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                            <GradientStop Color="Red" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Background>
+                    <HyperlinkButton.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Foreground>
+                </HyperlinkButton>
+                <HyperlinkButton x:Name="hypReprovados" Style="{StaticResource LinkStyle}" 
+                                 Click="hypReprovados_Click"
+                                 Content="Evadidos por Ano">
+                    <HyperlinkButton.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Blue" Offset="0.1" />
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                            <GradientStop Color="Red" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Background>
+                    <HyperlinkButton.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Foreground>
+                </HyperlinkButton>
+                <HyperlinkButton x:Name="hypMDXADHoc" Style="{StaticResource LinkStyle}" 
+                                 Click="hypMDXADHoc_Click"
+                                 Content="MDX Ad Hoc">
+                    <HyperlinkButton.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Blue" Offset="0.1" />
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                            <GradientStop Color="Red" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Background>
+                    <HyperlinkButton.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Foreground>
+                </HyperlinkButton>
+                <HyperlinkButton x:Name="hypExcel" Style="{StaticResource LinkStyle}" 
+                                 Click="hypExcel_Click"
+                                 Content="Excel">
+                    <HyperlinkButton.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Blue" Offset="0.1" />
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                            <GradientStop Color="Red" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Background>
+                    <HyperlinkButton.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Foreground>
+                </HyperlinkButton>
+                <HyperlinkButton x:Name="hypPowerBI" Style="{StaticResource LinkStyle}" 
+                                 Click="hypPowerBI_Click"
+                                 Content="Power BI">
+                    <HyperlinkButton.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Blue" Offset="0.1" />
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                            <GradientStop Color="Red" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Background>
+                    <HyperlinkButton.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="0.25" />
+                            <GradientStop Color="Green" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </HyperlinkButton.Foreground>
+                </HyperlinkButton>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="DarkOrange" BorderThickness="2" CornerRadius="4" Grid.Row="1">
+            <navigation:Frame x:Name="frConsultas"/>
+        </Border>
+    </Grid>
+</navigation:Page>

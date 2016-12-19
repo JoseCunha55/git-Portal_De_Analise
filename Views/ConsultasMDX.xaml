@@ -1,0 +1,165 @@
+﻿<navigation:Page xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"  x:Class="Portal_De_Analise.Views.ConsultasMDX" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="ConsultasMDX Page" >
+    <UserControl.Resources>
+        <sdk:HierarchicalDataTemplate x:Key="DimTemplate" ItemsSource="{Binding Name}">
+            <TextBlock Text="Dimensão" FontStyle="Italic" FontWeight="Bold"/>
+        </sdk:HierarchicalDataTemplate>
+        <sdk:HierarchicalDataTemplate x:Key="NameTemplate" 
+                                      ItemsSource="{Binding Name}" ItemTemplate="{StaticResource DimTemplate}">
+          
+        </sdk:HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutConsultaMDX">
+        <toolkit:DockPanel>
+            <Border x:Name="BarraComandos" toolkit:DockPanel.Dock="Top" BorderBrush="Aquamarine" BorderThickness="2" CornerRadius="3">
+                <StackPanel Orientation="Horizontal" Style="{StaticResource ContentPanelStyle}">
+                    <Button x:Name="btnProcessarCubo" Content="Processar Cubo" Height="23" Width="248" Click="btnProcessarCubo_Click"/>
+                    <Button x:Name="btnProcessarGrupoMedidas" Content="Processar Grupo de Medidas" Height="23" Width="200" Click="btnProcessarGrupoMedidas_Click"/>
+                    <Button x:Name="btnProcessarDim" Content="Processar Dimensões" Height="23" Width="200" Click="btnProcessarDim_Click"/>
+                    <Button x:Name="btnSintaxe" Content="Sintaxe MDX" Height="23" Width="200" Click="btnSintaxe_Click"/>
+                    <Button x:Name="btnExecutarMDX" Content="Executar MDX" Height="23" Width="200" Click="btnExecutarMDX_Click"/>
+                   <!-- <Button x:Name="btnSalvar" Content="Salvar MDX" Height="23" Width="200" Click="btnSalvar_Click"/> -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Selecione a Consulta MDX: " FontFamily="Georgia" FontWeight="Bold" Padding="5"/>
+                        <ComboBox x:Name="cboMDX" Height="23" Width="180" 
+                                  ItemsSource="{Binding}"
+                                  DisplayMemberPath="ConMDXID"
+                                  SelectedValue="{Binding Path=ConMDXID, Mode=TwoWay}"
+                                  />
+                    </StackPanel>
+                   
+                </StackPanel>
+            </Border>
+            
+                <Border toolkit:DockPanel.Dock="Left" BorderBrush="Snow" BorderThickness="2" CornerRadius="3"
+                    Height="600" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" >
+                
+                    <StackPanel Orientation="Vertical" Style="{StaticResource BrandingStackPanelStyle}" >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="Servidor:" Style="{StaticResource HeaderTextStyle}" Padding="5"/>
+                            <ComboBox x:Name="cboServer" Width="150" Height="35" Background="Snow">
+                                <ComboBoxItem Cursor="Hand" IsSelected="True">JoseAntonio-PC</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    <StackPanel Orientation="Vertical" toolkit:DockPanel.Dock="Left">
+                        <TextBlock Text="Base OLAP: " Style="{StaticResource HeaderTextStyle}" />
+                    <ListBox x:Name="lstBancos" Width="1450" Height="80" Background="AliceBlue"
+                             SelectionChanged="lstBancos_SelectionChanged"></ListBox>
+                    <TextBlock Text="Cubos:" Style="{StaticResource HeaderTextStyle}"/>
+                        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="100">
+                            <ListBox x:Name="ListaAMOCubos" Width="300" Height="200" Background="AliceBlue"
+                             SelectionChanged="ListaAMOCubos_SelectionChanged" SelectionMode="Single"/>
+                        </ScrollViewer>
+                    <TextBlock Text="Grupo de Medidas:" Style="{StaticResource HeaderTextStyle}"/>
+                        <ScrollViewer VerticalScrollBarVisibility="Visible" Height="70">
+                            <toolkit:ListBoxDragDropTarget AllowDrop="True" Height="70" Width="300"
+                                                   ItemDroppedOnTarget="ListBoxDragDropTarget_ItemDroppedOnTarget"
+                                                   ItemDragStarting="ListBoxDragDropTarget_ItemDragStarting">
+                                <ListBox x:Name="ListaAMOMedidas" Width="300" Height="200" Background="AliceBlue"
+                             SelectionChanged="ListaAMOMedidas_SelectionChanged" 
+                                     />
+                            </toolkit:ListBoxDragDropTarget>
+                        </ScrollViewer>
+                    <TextBlock Text="Dimensões:"  Style="{StaticResource HeaderTextStyle}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="70" >
+                        <sdk:TreeView x:Name="treeDimensions"
+                                      Width="300" Height="300"
+                                      ItemsSource="{Binding}">
+                            <!--
+                            <sdk:TreeViewItem Header="Curso">
+                                <sdk:TreeViewItem Header="Cod Curso"/>
+                                <sdk:TreeViewItem Header="Desc Curso"/>
+                                <sdk:TreeViewItem Header="Silga Curso"/>
+                            </sdk:TreeViewItem>
+                            <sdk:TreeViewItem Header="Data">
+                                <sdk:TreeViewItem Header="Ano"/>
+                                <sdk:TreeViewItem Header="Semestre"/>
+                                <sdk:TreeViewItem Header="Trimestre"/>
+                                <sdk:TreeViewItem Header="Bimestre"/>
+                            </sdk:TreeViewItem>
+                            <sdk:TreeViewItem Header="Disciplina">
+                                <sdk:TreeViewItem Header="Cod Disciplina"/>
+                                <sdk:TreeViewItem Header="Desc Disciplina"/>
+                                <sdk:TreeViewItem Header="Sigla Disciplina"/>
+                            </sdk:TreeViewItem>
+                            <sdk:TreeViewItem Header="Dados Socias Alunos">
+                                <sdk:TreeViewItem Header="Ano Letivo"/>
+                                <sdk:TreeViewItem Header="Area Procedencia Escola Origem"/>
+                                <sdk:TreeViewItem Header="Cod Turma"/>
+                                <sdk:TreeViewItem Header="Etnia"/>
+                                <sdk:TreeViewItem Header="Faltas"/>
+                                <sdk:TreeViewItem Header="Forma Ingresso"/>
+                                <sdk:TreeViewItem Header="Media Final"/>
+                                <sdk:TreeViewItem Header="Periodo Letivo"/>
+                                <sdk:TreeViewItem Header="Renda Familiar"/>
+                                <sdk:TreeViewItem Header="Reside"/>
+                                <sdk:TreeViewItem Header="Sexo"/>
+                                <sdk:TreeViewItem Header="Situacao"/>
+                                <sdk:TreeViewItem Header="Tipo Escola Origem"/>
+                                <sdk:TreeViewItem Header="Matricula"/>
+                            </sdk:TreeViewItem>
+                            -->
+                        </sdk:TreeView>
+                    </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+              
+            </Border>
+           
+            <Border toolkit:DockPanel.Dock="top" Height="120" HorizontalAlignment="Left" 
+                    BorderBrush="Brown" CornerRadius="3" Style="{StaticResource ContentBorderStyle}"
+                    VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Style="{StaticResource BrandingStackPanelStyle}"
+                            HorizontalAlignment="Left" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Consulta MDX:" Style="{StaticResource ContentTextStyle}" HorizontalAlignment="Left"
+                               Width="150" Height="25" FontFamily="Georgia" FontSize="12" FontWeight="Bold"/>
+                        <ProgressBar x:Name="myProgressBar" Height="25" Width="1000" Background="White" 
+                                     BorderBrush="Black" BorderThickness="2">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1.35" StartPoint="0.5,-0.3">
+                                    <GradientStop Color="Yellow" Offset="0"/>
+                                    <GradientStop Color="#FF209900" Offset="0.418"/>
+                                    <GradientStop Color="Yellow" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </StackPanel>
+                    <TextBox TextWrapping="Wrap" Background="SkyBlue" Foreground="Blue" Width="1200"
+                             Height="100" FontSize="12" Text="" AllowDrop="True" MouseEnter="TextBox_MouseEnter"
+                                 MouseLeave="TextBox_MouseLeave" x:Name="txtQuery" IsEnabled="True">
+
+                    </TextBox>
+                </StackPanel>
+            </Border>
+            <navigation:Frame x:Name="frmConsultas" Background="White">
+                <StackPanel Orientation="Vertical">
+                    <sdk:DataPager x:Name="dpMDX" Source="{Binding}"
+                                   DisplayMode="FirstLastPreviousNextNumeric"/>
+                    <Slider x:Name="slMDX" Minimum="0"
+                            Maximum="{Binding PageCount, ElementName=dpMDX, Mode=TwoWay}"
+                            Value="{Binding PageIndex, ElementName=dpMDX,Mode=TwoWay}"/>
+                    <sdk:DataGrid x:Name="dgMDX" ItemsSource="{Binding}" Width="1200" Height="400"
+                                  AutoGenerateColumns="False" AlternatingRowBackground="DarkOliveGreen">
+                        <sdk:DataGrid.Columns>
+                            <sdk:DataGridTextColumn Header="Curso" Binding="{Binding ColunaA}" Width="300"/>
+                            <sdk:DataGridTextColumn Header="Disciplina" Binding="{Binding ColunaB}" Width="400"/>
+                            <sdk:DataGridTextColumn Header="Aprovados" Binding="{Binding ColunaC}" Width="100"/>
+                            <sdk:DataGridTextColumn Header="Reprovados" Binding="{Binding ColunaD}" Width="100"/>
+                            <sdk:DataGridTextColumn Header="%Aprovados" Binding="{Binding ColunaPAp, StringFormat=\{0:n2\}}" Width="100"/>
+                            <sdk:DataGridTextColumn Header="%Reprovados" Binding="{Binding ColunaPRp, StringFormat=\{0:n2\}}" Width="100"/>
+                        </sdk:DataGrid.Columns>
+                    </sdk:DataGrid>
+                </StackPanel>
+            </navigation:Frame>
+            
+        </toolkit:DockPanel>
+    </Grid>
+</navigation:Page>

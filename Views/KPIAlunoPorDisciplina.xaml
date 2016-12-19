@@ -1,0 +1,222 @@
+﻿<navigation:Page xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="Portal_De_Analise.Views.KPIAlunoPorDisciplina" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:vg="clr-namespace:Visifire.Gauges;assembly=SLVisifire.Gauges"
+           mc:Ignorable="d"
+           xmlns:local="clr-namespace:Portal_De_Analise.Converters"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="hypKPIAlunoPorDisciplina Page">
+    <UserControl.Resources>
+        <local:MudarCorItemDataGrid x:Key="MudarCorDataGrid"/>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutKPIAlunoPorDisciplina">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="600" Padding="5"
+                BorderThickness="1" CornerRadius="5" BorderBrush="Crimson">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <sdk:DataPager x:Name="dpKPIAluno" Source="{Binding}" 
+                               DisplayMode="FirstLastPreviousNextNumeric"
+                               Width="600"/>
+                <Slider x:Name="slEvasao" Cursor="Hand" Width="600"
+                    Minimum="0" 
+                    Value="{Binding PageIndex, ElementName=dpKPIAluno,Mode=TwoWay}"
+                    Maximum="{Binding PageCount, ElementName=dpKPIAluno,Mode=TwoWay}"/>
+            </StackPanel>
+        </Border>
+        <Border  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"
+                BorderThickness="1" CornerRadius="5" BorderBrush="Crimson" Height="40" Width="950">
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Por favor, Selecione a turma desejada: " Style="{StaticResource HeaderTextStyle}"/>
+                <ComboBox x:Name="cboTurma" Width="200" Height="30" 
+                          ItemsSource="{Binding}" 
+                          DisplayMemberPath="Turma"
+                          SelectedValuePath="Turma"
+                          SelectionChanged="cboTurma_SelectionChanged"/>
+            </StackPanel>
+        </Border>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Grid.Row="1">
+            <sdk:DataGrid x:Name="dgKPIAlunoDisciplina" Margin="2" Height="300"
+                         AutoGenerateColumns="False" ItemsSource="{Binding}">
+                <sdk:DataGrid.CellStyle>
+                    <Style TargetType="sdk:DataGridCell">
+                        <Setter Property="Background" Value="{Binding Media, Converter={StaticResource MudarCorDataGrid}}"/>
+                    </Style> 
+                </sdk:DataGrid.CellStyle>
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridTextColumn Header="Disciplina" Binding="{Binding Path=Disciplina, Mode=TwoWay}"/>
+                    <sdk:DataGridTextColumn Header="Ano" Binding="{Binding Path=AnoLetivo}" />
+                    <sdk:DataGridTextColumn Header="Periodo" Binding="{Binding Path=PeriodoLetivo}" />
+                    <sdk:DataGridTextColumn Header="Média" Binding="{Binding Path=Media}"/>
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="800"
+                BorderThickness="1" CornerRadius="5" BorderBrush="Crimson">
+            <vg:Gauge Type="Circular" Width="400" Height="250" DefaultTemplate="CircularGaugeHalfNStyle" 
+                      BackFrameThickness="0" BorderThickness="2" OuterBackground="Transparent" 
+                      ShadowEnabled="True">
+                <vg:Gauge.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFC2C2C2" Offset="0.696"/>
+                        <GradientStop Color="#FFB4B4B4" Offset="0.416"/>
+                    </LinearGradientBrush>
+                </vg:Gauge.BorderBrush>
+                <vg:Gauge.Background>
+                    <RadialGradientBrush Center="0.499,1.164" GradientOrigin="0.497,1.037" RadiusY="1.221" RadiusX="0.575">
+                        <RadialGradientBrush.RelativeTransform>
+                            <CompositeTransform CenterY="0.967" CenterX="0.494" Rotation="181.246"/>
+                        </RadialGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF26272B" Offset="0.803"/>
+                        <GradientStop Color="#FF161618" Offset="0.49"/>
+                        <GradientStop Color="#FF8189FF" Offset="0.074"/>
+                    </RadialGradientBrush>
+                </vg:Gauge.Background>
+
+                <vg:Gauge.CircularScales>
+                    <vg:CircularScale Radius="1.4" ScaleThickness="0.01" Background="#302d23" BorderThickness="0" 
+                                      BorderBrush="Black" ShadowEnabled="False">
+                        <vg:CircularScale.MajorTicks>
+                            <vg:MajorTicks Background="Black" Placement="Inside"/>
+                        </vg:CircularScale.MajorTicks>
+                        <vg:CircularScale.MinorTicks>
+                            <vg:MinorTicks Background="Black"/>
+                        </vg:CircularScale.MinorTicks>
+                        <vg:CircularScale.ScaleLabels>
+                            <vg:ScaleLabels Placement="Inside" FontSize="14"/>
+                        </vg:CircularScale.ScaleLabels>
+                    </vg:CircularScale>
+                    <vg:CircularScale Name="Scale2" Radius="0.8" Minimum="0" Maximum="600" ScaleThickness="0.06" 
+                                      Background="White" BorderThickness="0" BorderBrush="#92a8c4" 
+                                      ShadowEnabled="False">
+                        <vg:CircularScale.MajorTicks>
+                            <vg:MajorTicks Background="White" Placement="Inside" TickWidth="0.1"/>
+                        </vg:CircularScale.MajorTicks>
+                        <vg:CircularScale.MinorTicks>
+                            <vg:MinorTicks Background="#92a8c4"/>
+                        </vg:CircularScale.MinorTicks>
+                        <vg:CircularScale.ScaleLabels>
+                            <vg:ScaleLabels Placement="Inside" FontSize="10"/>
+                        </vg:CircularScale.ScaleLabels>
+                    </vg:CircularScale>
+                </vg:Gauge.CircularScales>
+
+                <vg:Gauge.Indicators>
+                    <vg:NeedleIndicator Value="{Binding Path=Media}" CapBorderThickness="0" ShadowEnabled="true" DistanceFromScale="0.2" 
+                                        IndicatorWidth="0.25" 
+                                        BorderThickness="0" 
+                                        CapWidth="0.4" 
+                                        CapBorderBrush="#FF8D8C89" >
+                        <vg:NeedleIndicator.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+                                <GradientStop Color="White" Offset="0.494"/>
+                                <GradientStop Color="#FFF7F7F7" Offset="1"/>
+                                <GradientStop Color="DarkGray"/>
+                                <GradientStop Color="#FFAEAEAE" Offset="0.459"/>
+                            </LinearGradientBrush>
+                        </vg:NeedleIndicator.Background>
+                        <vg:NeedleIndicator.CapBackground>
+                            <RadialGradientBrush GradientOrigin="0.474,0.733">
+                                <GradientStop Color="#FF494949" Offset="1"/>
+                                <GradientStop Color="#FF2F1912" Offset="0.961"/>
+                                <GradientStop Color="#FF7C7C7C" Offset="0.837"/>
+                                <GradientStop Color="#FFB6B6B6"/>
+                                <GradientStop Color="Gray" Offset="0.786"/>
+                            </RadialGradientBrush>
+                        </vg:NeedleIndicator.CapBackground>
+                    </vg:NeedleIndicator>
+                    <vg:MarkerIndicator Value="100" ScaleName="Scale2" IndicatorLength="0.15" IndicatorWidth="0.15"/>
+                </vg:Gauge.Indicators>
+
+                <vg:Gauge.Ranges>
+                    <vg:Range StartValue="0" EndValue="100" StartWidth="0.1" Placement="Center" Opacity="0.9">
+                        <vg:Range.Background>
+                            <LinearGradientBrush EndPoint="0.783,0.5" StartPoint="0.217,0.5">
+                                <GradientStop Color="Red" Offset="0.981"/>
+                                <GradientStop Color="#FF32FF15"/>
+                                <GradientStop Color="#FF12ADFF" Offset="0.276"/>
+                                <GradientStop Color="#FF4785C5" Offset="0.677"/>
+                            </LinearGradientBrush>
+                        </vg:Range.Background>
+                    </vg:Range>
+                </vg:Gauge.Ranges>
+
+            </vg:Gauge>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <vg:Gauge Type="Linear" OuterBackground="Transparent" BorderBrush="#3e4044" BorderThickness="1" 
+                      Width="1400"  Height="250" CornerRadius="5">
+                <vg:Gauge.LinearScales>
+                    <vg:LinearScale Interval="20" ScaleThickness="0.05" BorderThickness="0" BorderBrush="Black"  
+                                    Orientation="Horizontal" Position="0,0.5" StartMargin="0.05" EndMargin="0.07" ShadowEnabled="false">
+                        <vg:LinearScale.MajorTicks>
+                            <vg:MajorTicks TickWidth="0.03" TickLength="0.25" Placement="Outside"/>
+                        </vg:LinearScale.MajorTicks>
+                        <vg:LinearScale.MinorTicks>
+                            <vg:MinorTicks TickWidth="0.03" Placement="Outside"/>
+                        </vg:LinearScale.MinorTicks>
+                        <vg:LinearScale.ScaleLabels>
+                            <vg:ScaleLabels Placement="Outside"/>
+                        </vg:LinearScale.ScaleLabels>
+                    </vg:LinearScale>
+                    <vg:LinearScale Name="Scale3" Interval="20" ScaleThickness="0.05" BorderThickness="0"  
+                                    Orientation="Horizontal" Position="0,0.5" StartMargin="0.05" EndMargin="0.07" ShadowEnabled="false">
+                        <vg:LinearScale.MajorTicks>
+                            <vg:MajorTicks TickWidth="0.03" TickLength="0.25" Placement="Inside"/>
+                        </vg:LinearScale.MajorTicks>
+                        <vg:LinearScale.MinorTicks>
+                            <vg:MinorTicks TickWidth="0.03" Placement="Inside"/>
+                        </vg:LinearScale.MinorTicks>
+                        <vg:LinearScale.ScaleLabels>
+                            <vg:ScaleLabels Placement="Inside"/>
+                        </vg:LinearScale.ScaleLabels>
+                    </vg:LinearScale>
+                </vg:Gauge.LinearScales>
+
+                <vg:Gauge.Indicators>
+                    <vg:BarIndicator Value="{Binding Path=Media}" Background="White" BorderThickness="0" ShadowEnabled="False"  
+                                     Placement="Center"/>
+                    <vg:MarkerIndicator Value="90" Placement="Outside" IndicatorWidth="0.2" IndicatorLength="0.2"  
+                        BorderBrush="#3e4044" Background="#6a6a3c"/>
+                    <vg:MarkerIndicator ScaleName="Scale3" Value="20" Placement="Inside" IndicatorWidth="0.2"  
+                        IndicatorLength="0.2" BorderBrush="#3e4044" Background="#7c7c7e"/>
+                </vg:Gauge.Indicators>
+
+                <vg:Gauge.Ranges>
+                    <vg:Range StartValue="0" EndValue="40" Placement="Outside">
+                        <vg:Range.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#a2a2a2" Offset="0"/>
+                                <GradientStop Color="#8b8b8b" Offset="0.6"/>
+                                <GradientStop Color="#787878" Offset="0.9"/>
+                                <GradientStop Color="#5f5f5f" Offset="1"/>
+                            </LinearGradientBrush>
+                        </vg:Range.Background>
+                    </vg:Range>
+                    <vg:Range ScaleName="Scale3" StartValue="60" EndValue="100" StartWidth="0.10" EndWidth="0"  
+                              Placement="Inside">
+                        <vg:Range.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#808040" Offset="1"/>
+                                <GradientStop Color="#6f6f37" Offset="0.9"/>
+                                <GradientStop Color="#7c7c3f" Offset="0.6"/>
+                                <GradientStop Color="#55552b" Offset="0"/>
+                            </LinearGradientBrush>
+                        </vg:Range.Background>
+                    </vg:Range>
+                </vg:Gauge.Ranges>
+
+            </vg:Gauge>
+        </Border>
+    </Grid>
+</navigation:Page>

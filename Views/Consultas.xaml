@@ -1,0 +1,35 @@
+﻿<navigation:Page xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns:rl="http://galaktika.ru/Ranet/UILibrary"  xmlns:PivotTable="clr-namespace:Ranet.AgOlap.Controls.PivotEditorForm.PivotTable;assembly=Ranet.AgOlap"  x:Class="Portal_De_Analise.Views.Consultas" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Consultas Page">
+    <Grid x:Name="LayoutRoot">
+        <sdk:PivotViewer x:Name="MyPiv">
+            <!--Set Properties-->
+            <sdk:PivotViewer.PivotProperties>
+                <sdk:PivotViewerStringProperty Id="Campus" Options="CanFilter" DisplayName="Campus"
+                                               Binding="{Binding Campus}"/>
+                <sdk:PivotViewerStringProperty Id="Concluidos" Options="None" DisplayName="Total Concluídos"
+                                               Binding="{Binding Concluidos}"/>
+                <sdk:PivotViewerStringProperty Id="Evdadidos" Options="None" DisplayName="Total de Evadidos"
+                                               Binding="{Binding Evadidos}"/>
+            </sdk:PivotViewer.PivotProperties>
+            <!-- Set Data-->
+            <sdk:PivotViewer.ItemTemplates>
+                <sdk:PivotViewerItemTemplate>
+                    <Border Width="200" Height="200" Background="Blue">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Curso}" FontSize="12" Foreground="White" />
+                            <TextBlock Text="{Binding Concuidos}" FontSize="12" Foreground="White" />
+                            <TextBlock Text="{Binding Evadidos}" FontSize="12" Foreground="White" />
+                        </StackPanel>
+                    </Border>
+                </sdk:PivotViewerItemTemplate>
+            </sdk:PivotViewer.ItemTemplates>
+        </sdk:PivotViewer>
+    </Grid>
+</navigation:Page>

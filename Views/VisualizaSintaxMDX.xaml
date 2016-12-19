@@ -1,0 +1,32 @@
+﻿<controls:ChildWindow x:Class="Portal_De_Analise.Views.VisualizaSintaxMDX"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Width="600" Height="500" 
+           Title="Sintax de consultas MDX">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Beige" CornerRadius="3" BorderThickness="2" Style="{StaticResource ContentBorderStyle}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Sintax MDX" FontWeight="Bold" FontFamily="Arial" FontSize="16" Padding="5"/>
+                <TextBlock TextWrapping="Wrap" x:Name="txtSintax" FontFamily="Georgia" FontSize="14">
+                    <Run Foreground="Blue" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Black" CornerRadius="3" BorderThickness="2" Style="{StaticResource ContentBorderStyle}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Exemplo de consulta MDX" FontWeight="Bold" FontFamily="Arial" FontSize="16" Padding="5"/>
+                <TextBlock TextWrapping="Wrap" x:Name="txtDemo1MDX"/>
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" >
+            <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0"/>
+            <Button x:Name="OKButton" Content="OK" Click="OKButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" />
+        </StackPanel>
+    </Grid>
+</controls:ChildWindow>

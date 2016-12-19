@@ -1,0 +1,72 @@
+﻿<navigation:Page x:Class="Portal_De_Analise.About" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+    Title="About" 
+    Style="{StaticResource PageStyle}">
+
+    <Grid x:Name="LayoutSobre">
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/EduCase.png" Stretch="Uniform"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Honeydew" BorderThickness="2" CornerRadius="10" Width="1000" Height="50"
+                HorizontalAlignment="Center" Background="Gainsboro" Padding="2" VerticalAlignment="Top">
+            <TextBlock Text="Portal de análise da Reprovação e Evasão Escolar no IFRN"
+                           FontFamily="Verdana" FontSize="20" FontWeight="Bold" 
+                           HorizontalAlignment="Center" Padding="5"/>
+        </Border> 
+        <Border BorderBrush="Honeydew" BorderThickness="2" CornerRadius="12" Width="1000" Height="200" Grid.Row="1"
+                VerticalAlignment="Top" Background="White" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="Este portal tem os seguintes objetivo: "
+                           FontFamily="Verdana" FontSize="18" FontWeight="Bold" 
+                           HorizontalAlignment="Left" Padding="5" />
+                <TextBlock Text=""/>
+                <TextBlock Text="> Ser um canal de acesso aos dados, ao usuário final, dos resultados de um sistema de BI;"
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+                <TextBlock Text="> Através de dashboards, o utilizador pode analisar a situação dos alunos, relacionados a reprovação e evasão escolar;"
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+                <TextBlock Text="> O utilizador, pode acompanhar o desempenho dos alunos, através de Indicadores de Desempenho (KPI);"
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+                <TextBlock Text="> Usando as consultas, o utilizador, pode analisar o evasão escolar de diversas maneiras diferentes;"
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+                <TextBlock Text="> Além do mais, o utilizador, tem a sua disposição, diversos índices sobre as taxas de Retenção, Reprovação, Conclusão e Evasão escolar;"
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+                <TextBlock Text="> O utilizador também tem a sua disposição, previsões sobre a evasão escolar, por diversos ângulos."
+                           FontFamily="Verdana" FontSize="12" Padding="5"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" BorderBrush="Honeydew" Background="Beige" BorderThickness="2" CornerRadius="10">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="Evasão Escolar no Brasil" FontFamily="Georgia" FontSize="20" FontWeight="Bold" Padding="10" />
+                <TextBlock Text="IBGE: abandono escolar no Brasil é 3 vezes maior que na Europa" FontFamily="Georgia" FontSize="16" Padding="5"/>
+                <TextBlock x:Name="txtEvasaoUm"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                <TextBlock x:Name="txtEvasaoDois"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                <TextBlock x:Name="txtEvasaoTres"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                <TextBlock x:Name="txtEvasaoQua"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                <TextBlock x:Name="txtEvasaoQui"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                <TextBlock x:Name="txtEvasaoSex"                             
+                           FontFamily="Verdana" FontSize="12" Padding="5"
+                           HorizontalAlignment="Left" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</navigation:Page>

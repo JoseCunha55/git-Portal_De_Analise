@@ -1,0 +1,42 @@
+﻿<navigation:Page xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="Portal_De_Analise.Views.MDXEvadidos" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="MDXEvadidos Page">
+   
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <sdk:DataPager x:Name="dpCuboEva" Source="{Binding}" 
+                               DisplayMode="FirstLastPreviousNextNumeric"
+                               />
+            <Slider x:Name="slEvasao" Cursor="Hand"
+                    Minimum="0" 
+                    Value="{Binding PageIndex, ElementName=dpCuboEva,Mode=TwoWay}"
+                    Maximum="{Binding PageCount, ElementName=dpCuboEva,Mode=TwoWay}"/>
+        </StackPanel>
+        <Button x:Name="btnVisualizaMDX" Content="Visualizar consulta MDX" Grid.Row="1"
+                Click="btnVisualizaMDX_Click"/>
+        <sdk:DataGrid AutoGenerateColumns="False" x:Name="dgCuboEvadiso"
+                      ItemsSource="{Binding}" Grid.Row="2">
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTextColumn Header="Campus" Binding="{Binding Campus}"/>
+                <sdk:DataGridTextColumn Header="Curso" Binding="{Binding Curso}"/>
+                <sdk:DataGridTextColumn Header="Concluídos" Binding="{Binding Concluidos}"/>
+                <sdk:DataGridTextColumn Header="Evadidos" Binding="{Binding Evadidos}"/>
+                <sdk:DataGridTextColumn Header="%Concluídos" Binding="{Binding PerConclusao,StringFormat=p}"/>
+                <sdk:DataGridTextColumn Header="%Evadidos" Binding="{Binding PerEvadidos,StringFormat=p}"/>
+                <sdk:DataGridTextColumn Header="Total" Binding="{Binding TotalEvaCon}"/>
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+        <sdk:Frame x:Name="frVisualizaMDX" />
+    </Grid>
+</navigation:Page>

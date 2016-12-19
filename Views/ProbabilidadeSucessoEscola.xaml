@@ -1,0 +1,88 @@
+﻿<navigation:Page xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="Portal_De_Analise.Views.ProbabilidadeSucessoEscola" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:local="clr-namespace:Portal_De_Analise.Converters"
+           xmlns:vc="clr-namespace:Visifire.Charts;assembly=SLVisifire.Charts"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="ProbabilidadeSucessoEscola Page">
+    <UserControl.Resources>
+        <local:PercentSucesso x:Key="PercentalSucesso"/>
+        <local:CalcularInSucesso x:Key="CalcularDif"/>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutProbSucessoEscola">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="500"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="550"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top" BorderBrush="Beige"
+                BorderThickness="2" CornerRadius="5" Background="Sienna">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Distribuição de Poisson para prever o Sucesso dos alunos" HorizontalAlignment="Center" 
+                   Style="{StaticResource ApplicationNameStyle}"/>
+                <TextBlock Text="Com base no Nº de reprovações, em função do tipo de escola de origem"
+                           HorizontalAlignment="Center" 
+                   Style="{StaticResource ApplicationNameStyle}"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" BorderBrush="Beige" BorderThickness="2" CornerRadius="5" Background="Beige">
+            <StackPanel Orientation="Vertical">
+                <sdk:DataPager x:Name="dpProbSucessoEscola" Source="{Binding}" 
+                               DisplayMode="FirstLastPreviousNextNumeric"/>
+                <Slider x:Name="slProbSucessoTema" Cursor="Hand" Minimum="0" 
+                    Value="{Binding PageIndex, ElementName=dpProbSucessoEscola,Mode=TwoWay}"
+                    Maximum="{Binding PageCount, ElementName=dpProbSucessoEscola,Mode=TwoWay}"/>
+                <sdk:DataGrid x:Name="dgProbSucessoEscola" AutoGenerateColumns="False" AlternatingRowBackground="Sienna"
+                              ItemsSource="{Binding}">
+                    <sdk:DataGrid.Columns>
+                        <sdk:DataGridTextColumn Header="Matrícula" Binding="{Binding Matricula}"/>
+                        <sdk:DataGridTextColumn Header="Em Função De" Binding="{Binding Tema}" Width="120"/>
+                        <sdk:DataGridTextColumn Header="Nº Reprovações" Binding="{Binding Reprovacao}"/>
+                        <sdk:DataGridTextColumn Header="%Sucesso" Binding="{Binding Sucesso, StringFormat=\{0:n2\}}"/>
+                        <sdk:DataGridTextColumn Header="%InSucesso" Binding="{Binding InSucesso, StringFormat=\{0:n2\}}"/>
+                    </sdk:DataGrid.Columns>
+                </sdk:DataGrid>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" Width="855"
+                BorderThickness="1" CornerRadius="5" BorderBrush="Crimson">
+            <vc:Chart  Width="850" Height="550"  x:Name="ChartEvasaoCurso"
+                       Theme="Theme5" View3D="True" BorderBrush="Gray" LightingEnabled="False"
+                       ZoomingEnabled="True" AnimatedUpdate="True">
+
+                <vc:Chart.Titles>
+                    <vc:Title Text="Distribuição de Poisson, com base no Nº de reprovaçoes"/>
+                </vc:Chart.Titles>
+
+                <vc:Chart.Series>
+                    <vc:DataSeries RenderAs="Line" LabelEnabled="True" LabelFontFamily="Verdana"  
+                            LabelText="#AxisXLabel, #YValue" LabelLineThickness="0.5" Bevel="False" 
+                                   ShowInLegend="False" DataSource="{Binding ItemsSource,ElementName=dgProbSucessoEscola}"
+                                   AutoFitToPlotArea="True">
+                        <vc:DataSeries.DataMappings>
+                            <vc:DataMapping MemberName="AxisXLabel"  Path="Tema"></vc:DataMapping>
+                            <vc:DataMapping MemberName="YValue" Path="Sucesso"></vc:DataMapping>
+                        </vc:DataSeries.DataMappings>
+                    </vc:DataSeries>
+                    <vc:DataSeries RenderAs="Line" LabelEnabled="True" LabelFontFamily="Verdana"  
+                            LabelText="#AxisXLabel, #YValue" LabelLineThickness="0.5" Bevel="False" 
+                                   ShowInLegend="False" DataSource="{Binding ItemsSource,ElementName=dgProbSucessoEscola}"
+                                   AutoFitToPlotArea="True">
+                        <vc:DataSeries.DataMappings>
+                            <vc:DataMapping MemberName="AxisXLabel"  Path="Tema"></vc:DataMapping>
+                            <vc:DataMapping MemberName="YValue" Path="InSucesso"></vc:DataMapping>
+                        </vc:DataSeries.DataMappings>
+                    </vc:DataSeries>
+                </vc:Chart.Series>
+            </vc:Chart>
+        </Border>
+    </Grid>
+</navigation:Page>

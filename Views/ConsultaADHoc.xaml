@@ -1,0 +1,21 @@
+﻿<navigation:Page xmlns:viblendRibbonBar="clr-namespace:VIBlend.Silverlight.Controls;assembly=VIBlend.Silverlight.RibbonBar"  xmlns:viblendMenu="clr-namespace:VIBlend.Silverlight.Controls;assembly=VIBlend.Silverlight.Menu"  xmlns:viblendDataGrid="clr-namespace:VIBlend.Silverlight.Controls;assembly=VIBlend.Silverlight.DataGrid"  
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="Portal_De_Analise.Views.ConsultaADHoc"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="ConsultaADHoc Page">
+    <Grid x:Name="LayoutRoot">
+
+       <!-- <sdk:PivotViewer HorizontalAlignment="Left" Margin="12,28,0,0" VerticalAlignment="Top" Width="614" Height="422"/>
+        <myVI:DataGrid AutoGenerateColumns="True" BorderBrush="LightGray" BorderThickness="2"
+                       Height="276" HorizontalAlignment="Left" Margin="24,12,0,0"
+                       Name="dataGrid1" VerticalAlignment="Top" Width="287"/>
+        <viblendDataGrid:DataGridPivotDesign /> -->
+        
+        <Button x:Name="btnOK" Content="OK" Click="btnOK_Click" Height="35"/>
+    </Grid>
+</navigation:Page>

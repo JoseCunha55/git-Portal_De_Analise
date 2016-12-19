@@ -1,0 +1,21 @@
+﻿<navigation:Page x:Class="Portal_De_Analise.Views.Games" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Games Page">
+    <Grid x:Name="LayoutGames">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Brown" BorderThickness="2" CornerRadius="3" Grid.Row="0">
+            <Button x:Name="btnGame" Content="Game" Width="200" Height="23" Click="btnGame_Click"/>
+        </Border>
+        
+        <WebBrowser x:Name="webContent" Grid.Row="1" />
+    </Grid>
+</navigation:Page>
