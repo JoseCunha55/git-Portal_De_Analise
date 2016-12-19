@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Portal_De_Analise.Web.Services.Porta_De_AnaliseService" CodeBehind="Porta_De_AnaliseService.svc.cs" %>
